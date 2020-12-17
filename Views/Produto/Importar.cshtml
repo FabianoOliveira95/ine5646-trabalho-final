@@ -1,0 +1,101 @@
+﻿<!-- Content Header (Page header) -->
+<div class="content-header">
+	<div class="container-fluid">
+		<div class="row mb-2">
+			<div class="col-sm-6">
+				<h1 class="m-0 text-dark">Produtos</h1>
+			</div><!-- /.col -->
+			<div class="col-sm-6">
+				<ol class="breadcrumb float-sm-right">
+					<li class="breadcrumb-item"><a href="#">Home</a></li>
+					<li class="breadcrumb-item active">Produtos</li>
+				</ol>
+			</div><!-- /.col -->
+		</div><!-- /.row -->
+	</div><!-- /.container-fluid -->
+</div>
+<div class="content-body">
+	<div class="row">
+		<div class="col-12">
+			<div class="card" style="margin-left: 2%; max-width: 92%">
+				<div class="card-header">
+					<h3 class="card-title">Lista de produtos</h3>
+				</div>
+				<!-- /.card-header -->
+				<div class="card-body table-responsive p-0" style="height: 300px;">
+					<table id="example1" class="table table-bordered table-striped">
+						<thead>
+							<tr>
+								<th>Código Interno</th>
+								<th>Código do Produto no Cliente</th>
+								<th>Descrição</th>
+								<th>IPI</th>
+							</tr>
+						</thead>
+						@{
+							List<SuddenAmbiente.Model.Produto> listProduto = new List<SuddenAmbiente.Model.Produto>();
+
+							string html = string.Empty;
+
+							if (ViewBag.listProduto != null)
+							{
+								listProduto = ViewBag.listProduto;
+
+								foreach (SuddenAmbiente.Model.Produto produto in listProduto)
+								{
+									html += "<tr>";
+
+									html += "<td>" + produto.IdProduto + "</td>";
+
+									html += "<td>" + produto.CodigoProdutoCliente + "</td>";
+
+									html += "<td>" + produto.Descricao + "</td>";
+
+									html += "<td>" + produto.IPI + "</td>";
+
+									html += "</tr>";
+								}
+							}
+						}
+						<tbody>
+							@Html.Raw(html)
+						</tbody>
+					</table>
+				</div>
+				<!-- /.card-body -->
+			</div>
+			<!-- /.card -->
+		</div>
+	</div>
+	<br />
+	<div class="callout callout-info" style="margin-left: 2%; max-width: 92%">
+		<form action="Salvar" method="post" enctype="multipart/form-data">
+			<div class="card-body" style="padding: 1rem">
+				<div class="form-group">
+					<label for="exampleInputFile">Código interno do Produto</label>
+					<div class="input-group">
+						<input type="text" name="CodigoProdutoCliente" id="CodigoProdutoCliente" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="exampleInputFile">Descrição</label>
+					<div class="input-group">
+						<input type="text" name="Descricao" id="Descricao" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="exampleInputFile">IPI</label>
+					<div class="input-group">
+						<input type="text" name="IPI" id="IPI" />
+					</div>
+				</div>
+			</div>
+			<!-- /.card-body -->
+
+			<div class="card-footer">
+				<button type="submit" class="btn btn-primary">Inserir</button>
+			</div>
+			<br />
+		</form>
+	</div>
+</div>

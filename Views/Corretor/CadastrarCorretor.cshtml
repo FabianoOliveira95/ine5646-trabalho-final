@@ -1,0 +1,47 @@
+﻿<!-- Content Header (Page header) -->
+<div class="content-header">
+	<div class="container-fluid">
+		<div class="row mb-2">
+			<div class="col-sm-6">
+				<h1 class="m-0 text-dark">Cadastrar corretor</h1>
+			</div><!-- /.col -->
+			<div class="col-sm-6">
+				<ol class="breadcrumb float-sm-right">
+					<li class="breadcrumb-item"><a href="#">Home</a></li>
+					<li class="breadcrumb-item active">Imóveis</li>
+				</ol>
+			</div><!-- /.col -->
+		</div><!-- /.row -->
+	</div><!-- /.container-fluid -->
+</div>
+	<br />
+	<div class="callout callout-info" style="margin-left: 2%; max-width: 92%">
+		<form action="Salvar" method="post" enctype="multipart/form-data">
+            <div class="card-body" style="padding: 1rem">
+                <div class="form-group">
+                    <label for="exampleInputFile">Nome do corretor</label>
+                    <div class="input-group">
+                        <input type="text" name="Nome" id="Nome" placeholder="Escreva seu nome" required="required" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputFile">Email</label>
+                    <div class="input-group">
+                        <input type="email" name="Email" id="Email" placeholder="Escreva seu e-mail" required="required" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputFile">Senha</label>
+                    <div class="input-group">
+                        <input type="password" name="Senha" id="Senha" placeholder="Escreva sua senha" required="required" />
+                    </div>
+                </div>
+            </div>
+			<!-- /.card-body -->
+
+			<div class="card-footer">
+				<button type="submit" class="btn btn-primary">Cadastrar</button>
+			</div>
+			<br />
+		</form>
+	</div>

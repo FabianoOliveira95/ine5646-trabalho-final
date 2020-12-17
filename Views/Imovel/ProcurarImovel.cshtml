@@ -1,0 +1,158 @@
+﻿<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0 text-dark">Imóveis</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active">Procurar por imóveis</li>
+                </ol>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+
+<div class="content-body">
+    <div class="row">
+        <div class="col-12">
+            <div class="card" style="margin-left: 2%; max-width: 92%">
+                <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Procure por situação..." />
+                <div class="card-header">
+                    <h3 class="card-title">Lista de imóveis</h3>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body table-responsive p-0" style="height: 300px;">
+                    <table id="imovelLista" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>Imagem</th>
+                                <th>Número de Inscrição</th>
+                                <th>Endereço</th>
+                                <th>Tipo</th>
+                                <th>Nº Dormitórios</th>
+                                <th>Nº Banheiros</th>
+                                <th>Nº Vagas na Garagem</th>
+                                <th>Valor Aluguel</th>
+                                <th>Situação</th>
+                            </tr>
+                        </thead>
+                        @{
+                            List<SuddenAmbiente.Models.Imovel> listImovel = new List<SuddenAmbiente.Models.Imovel>();
+
+                            string html = string.Empty;
+
+                            if (ViewBag.listImovel != null)
+                            {
+                                listImovel = ViewBag.listImovel;
+
+                                foreach (SuddenAmbiente.Models.Imovel imovel in listImovel)
+                                {
+                                    html += "<tr>";
+
+                                    html += "<td> <img src='https://img.olx.com.br/images/96/963003028557367.jpg' style='height: 100px; width: 100px'></td>";
+
+                                    html += "<td>" + imovel.NumeroInscricao + "</td>";
+
+                                    html += "<td>" + imovel.Endereco + "</td>";
+
+                                    html += "<td>" + imovel.Tipo + "</td>";
+
+                                    html += "<td>" + imovel.NumeroDormitorios + "</td>";
+
+                                    html += "<td>" + imovel.NumeroBanheiros + "</td>";
+
+                                    html += "<td>" + imovel.NumeroVagasGaragem + "</td>";
+
+                                    html += "<td>" + imovel.ValorAluguel + "</td>";
+
+                                    html += "<td>" + imovel.Situacao + "</td>";
+
+                                    html += "</tr>";
+                                }
+                            }
+                        }
+                        <tbody>
+                            @Html.Raw(html)
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+        </div>
+    </div>
+    <br />
+    <div class="callout callout-info" style="margin-left: 2%; max-width: 92%">
+        <form action="SalvarInteresse" method="post" enctype="multipart/form-data">
+            <div class="card-body" style="padding: 1rem">
+                <div class="form-group">
+                    <label for="exampleInputFile">Nome</label>
+                    <div class="input-group">
+                        <input type="text" name="Nome" id="Nome" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputFile">Contato</label>
+                    <div class="input-group">
+                        <input type="text" name="Contato" id="Contato" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputFile">Primeiro imóvel de interesse</label>
+                    <div class="input-group">
+                        <input type="text" name="InscricaoImovelUm" id="InscricaoImovelUm" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputFile">Segundo imóvel de interesse</label>
+                    <div class="input-group">
+                        <input type="text" name="InscricaoImovelDois" id="InscricaoImovelDois" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputFile">Terceiro imóvel de interesse</label>
+                    <div class="input-group">
+                        <input type="text" name="InscricaoImovelTres" id="InscricaoImovelTres" />
+                    </div>
+                </div>
+            </div>
+            <!-- /.card-body -->
+
+            <div class="card-footer">
+                <button type="submit" class="btn btn-primary">Tenho interesse</button>
+            </div>
+            <br />
+        </form>
+    </div>
+</div>
+
+@section Scripts
+    {
+    <script type="text/javascript" src="@Url.Content("~/lib/jquery/dist/jquery.js")"></script>
+    <script type="text/javascript">
+        function myFunction() {
+            // Declare variables
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("myInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("imovelLista");
+            tr = table.getElementsByTagName("tr");
+
+            // Loop through all table rows, and hide those who don't match the search query
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[9];
+                if (td) {
+                    txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+    </script>
+}

@@ -1,0 +1,66 @@
+﻿<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0 text-dark">Entre com sua conta de corretor</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active">Imóveis</li>
+                </ol>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+<div class="callout callout-info" style="margin-left: 2%; max-width: 92%">
+    <div class="card-body" style="padding: 1rem">
+        <div class="form-group">
+            <label for="Email">Email</label>
+            <div class="input-group">
+                <input type="email" name="Email" id="Email" placeholder="Escreva seu e-mail" required="required" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="Senha">Senha</label>
+            <div class="input-group">
+                <input type="password" name="Senha" id="Senha" placeholder="Escreva sua senha" required="required" />
+            </div>
+        </div>
+    </div>
+    <!-- /.card-body -->
+
+    <div class="card-footer">
+        <button id="confirm" class="btn btn-primary">Entrar</button>
+        <a href="~/Corretor/CadastrarCorretor">Não tem uma conta corretor? Clique aqui</a>
+    </div>
+    <br />
+</div>
+
+@section Scripts
+    {
+    <script type="text/javascript" src="@Url.Content("~/lib/jquery/dist/jquery.js")"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#confirm').click(function () {
+
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("Autenticar", "Corretor")',
+                    data: { email: $('#Email').val(), senha: $('#Senha').val() },
+                    success: function (response) {
+                        if (response !== '') {
+                            $('#NomeCorretor').html(response.nomeCorretor);
+                            window.location.href = response.redirectToUrl;
+                        } else {
+                            alert("Email ou senha incorreta!")
+                        }
+                    },
+                    error: function () { alert('Ocorreu um erro inesperado!'); }
+                });
+    });
+
+});
+    </script>
+}

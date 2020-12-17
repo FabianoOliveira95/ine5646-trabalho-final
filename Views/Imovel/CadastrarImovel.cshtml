@@ -1,0 +1,324 @@
+﻿<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0 text-dark">Seja bem-vindo, @ViewBag.Nome</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active">Imóveis</li>
+                </ol>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+<div class="content-body">
+    <div class="row">
+        <div class="col-12">
+            <div class="card" style="margin-left: 2%; max-width: 92%">
+                <div class="card-header">
+                    <h3 class="card-title">Lista de imóveis</h3>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body table-responsive p-0" style="height: 300px;">
+                    <table id="example1" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>Imagem</th>
+                                <th>Número de Inscrição</th>
+                                <th>Endereço</th>
+                                <th>Tipo</th>
+                                <th>Nº Dormitórios</th>
+                                <th>Nº Banheiros</th>
+                                <th>Nº Vagas na Garagem</th>
+                                <th>Valor Aluguel</th>
+                                <th>Situação</th>
+                            </tr>
+                        </thead>
+                        @{
+                            List<SuddenAmbiente.Models.Imovel> listImovel = new List<SuddenAmbiente.Models.Imovel>();
+
+                            string html = string.Empty;
+
+                            if (ViewBag.listImovel != null)
+                            {
+                                listImovel = ViewBag.listImovel;
+
+                                foreach (SuddenAmbiente.Models.Imovel imovel in listImovel)
+                                {
+                                    html += "<tr>";
+
+                                    html += "<td> <img src='" + imovel.Imagem + "' style='height: 100px; width: 100px'></td>";
+
+                                    html += "<td>" + imovel.NumeroInscricao + "</td>";
+
+                                    html += "<td>" + imovel.Endereco + "</td>";
+
+                                    html += "<td>" + imovel.Tipo + "</td>";
+
+                                    html += "<td>" + imovel.NumeroDormitorios + "</td>";
+
+                                    html += "<td>" + imovel.NumeroBanheiros + "</td>";
+
+                                    html += "<td>" + imovel.NumeroVagasGaragem + "</td>";
+
+                                    html += "<td>" + imovel.ValorAluguel + "</td>";
+
+                                    html += "<td>" + imovel.Situacao + "</td>";
+
+                                    html += "</tr>";
+                                }
+                            }
+                        }
+                        <tbody>
+                            @Html.Raw(html)
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+        </div>
+    </div>
+    <br />
+    <div class="container">
+        <h2>Cadastro</h2>
+        <p>Operações:</p>
+        <nav id="navCorretor">
+            <ul class="nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Cadastrar novo imóvel</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Atualizar situação de imóvel</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Possíveis inquilinos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Alterar senha</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <div id="navCadastrarImovel" class="callout callout-info" style="margin-left: 2%; max-width: 92%">
+        <form action="Salvar" method="post" enctype="multipart/form-data">
+            <div class="card-body" style="padding: 1rem">
+                <div class="form-group">
+                    <label for="exampleInputFile">Link da imagem</label>
+                    <div class="input-group">
+                        <input type="text" name="Imagem" id="Imagem" required />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputFile">Número de inscrição</label>
+                    <div class="input-group">
+                        <input type="text" name="NumeroInscricao" id="NumeroInscricao" required />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputFile">Endereço</label>
+                    <div class="input-group">
+                        <input type="text" name="Endereco" id="Endereco" required />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputFile">Tipo</label>
+                    <div class="input-group">
+                        <select name="Tipo" id="Tipo">
+                            <option value="0">Casa</option>
+                            <option value="1">Apartamento</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputFile">Número de dormitórios</label>
+                    <div class="input-group">
+                        <input type="text" name="NumeroDormitorios" id="NumeroDormitorios" required />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputFile">Número de banheiros</label>
+                    <div class="input-group">
+                        <input type="text" name="NumeroBanheiros" id="NumeroBanheiros" required />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputFile">Número de vagas de garagem</label>
+                    <div class="input-group">
+                        <input type="text" name="NumeroVagasGaragem" id="NumeroVagasGaragem" required />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputFile">Valor do aluguel</label>
+                    <div class="input-group">
+                        <input type="text" name="ValorAluguel" id="ValorAluguel" required />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputFile">Situação</label>
+                    <div class="input-group">
+                        <select name="Situacao" id="Situacao">
+                            <option value="0">Livre</option>
+                            <option value="1">Reservado</option>
+                            <option value="2">Alugado</option>
+                            <option value="3">Indisponível</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <!-- /.card-body -->
+
+            <div class="card-footer">
+                <button type="submit" class="btn btn-primary">Cadastrar</button>
+            </div>
+            <br />
+        </form>
+    </div>
+    <div id="navAtualizarSituacaoImovel" class="callout callout-info" style="margin-left: 2%; max-width: 92%">
+        <form action="Atualizar" method="post" enctype="multipart/form-data">
+            <div class="card-body" style="padding: 1rem">
+                <div class="form-group">
+                    <label for="exampleInputFile">Número de inscrição</label>
+                    <div class="input-group">
+                        <input type="text" name="NumeroInscricao" id="NumeroInscricao" required />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputFile">Situação</label>
+                    <div class="input-group">
+                        <select name="Situacao" id="Situacao">
+                            <option value="0">Livre</option>
+                            <option value="1">Reservado</option>
+                            <option value="2">Alugado</option>
+                            <option value="3">Indisponível</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <!-- /.card-body -->
+
+            <div class="card-footer">
+                <button type="submit" class="btn btn-primary">Atualizar</button>
+            </div>
+            <br />
+        </form>
+    </div>
+</div>
+
+<div id="navInteresses" class="row">
+    <div class="col-12">
+        <div class="card" style="margin-left: 2%; max-width: 92%">
+            <div class="card-header">
+                <h3 class="card-title">Lista de possíveis inquilinos e seus interesses</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body table-responsive p-0" style="height: 300px;">
+                <table id="inquilinos" class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Contato</th>
+                            <th>Inscrição do primeiro imóvel de interesse</th>
+                            <th>Inscrição do segundo imóvel de interesse</th>
+                            <th>Inscrição do terceiro imóvel de interesse</th>
+                        </tr>
+                    </thead>
+                    @{
+                        List<SuddenAmbiente.Models.Interesse> listInteresse = new List<SuddenAmbiente.Models.Interesse>();
+
+                        string html2 = string.Empty;
+
+                        if (ViewBag.listInteresse != null)
+                        {
+                            listInteresse = ViewBag.listInteresse;
+
+                            foreach (SuddenAmbiente.Models.Interesse interesse in listInteresse)
+                            {
+                                html2 += "<tr>";
+
+                                html2 += "<td>" + interesse.Nome + "</td>";
+
+                                html2 += "<td>" + interesse.Contato + "</td>";
+
+                                html2 += "<td>" + interesse.InscricaoImovelUm + "</td>";
+
+                                html2 += "<td>" + interesse.InscricaoImovelDois + "</td>";
+
+                                html2 += "<td>" + interesse.InscricaoImovelTres + "</td>";
+
+                                html2 += "</tr>";
+                            }
+                        }
+                    }
+                    <tbody>
+                        @Html.Raw(html2)
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+    </div>
+</div>
+
+<div id="navSenha" class="callout callout-info" style="margin-left: 2%; max-width: 92%">
+    <form action="AlterarSenha" method="post" enctype="multipart/form-data">
+        <div class="card-body" style="padding: 1rem">
+            <input type="hidden" name="Nome" value="@ViewBag.Nome" />
+            <div class="form-group">
+                <label for="exampleInputFile">Nova Senha</label>
+                <div class="input-group">
+                    <input type="password" name="Senha" id="Senha" placeholder="Digite a nova senha" required />
+                </div>
+            </div>
+        </div>
+
+        <!-- /.card-body -->
+
+        <div class="card-footer">
+            <button type="submit" class="btn btn-primary">Atualizar</button>
+        </div>
+        <br />
+    </form>
+</div>
+
+@section Scripts
+    {
+    <script type="text/javascript" src="@Url.Content("~/lib/jquery/dist/jquery.js")"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $('#navAtualizarSituacaoImovel').hide();
+            $('#navInteresses').hide();
+            $('#navSenha').hide();
+
+            $('#navCorretor li a').click(function () {
+                if ($(this).text() === "Cadastrar novo imóvel") {
+                    $('#navAtualizarSituacaoImovel').fadeOut();
+                    $('#navInteresses').fadeOut();
+                    $('#navSenha').fadeOut();
+                    $('#navCadastrarImovel').fadeIn();
+                } else if ($(this).text() === "Atualizar situação de imóvel") {
+                    $('#navCadastrarImovel').fadeOut();
+                    $('#navSenha').fadeOut();
+                    $('#navInteresses').fadeOut();
+                    $('#navAtualizarSituacaoImovel').fadeIn();
+                } else if ($(this).text() === "Possíveis inquilinos") {
+                    $('#navCadastrarImovel').fadeOut();
+                    $('#navSenha').fadeOut();
+                    $('#navAtualizarSituacaoImovel').fadeOut();
+                    $('#navInteresses').fadeIn();
+                } else if ($(this).text() === "Alterar senha") {
+                    $('#navCadastrarImovel').fadeOut();
+                    $('#navAtualizarSituacaoImovel').fadeOut();
+                    $('#navInteresses').fadeOut();
+                    $('#navSenha').fadeIn();
+                }
+            });
+
+        });
+    </script>
+}
